@@ -2,11 +2,12 @@ import TargetParagraph from "../components/TargetParagraph";
 import { HitboxContextProvider } from "../context/HitboxContext";
 
 export default function Game() {
-  const text = "hi, longer word superlong are // you?";
+  const text =
+    "hello jarred, you sill sausage. this is my thing that I'm showing you.";
 
   return (
     <HitboxContextProvider>
-      <TargetParagraph text={text} />;
+      <TargetParagraph text={text} />
     </HitboxContextProvider>
   );
 }
