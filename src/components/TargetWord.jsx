@@ -28,9 +28,8 @@ const DestructribleWord = forwardRef(function DestructribleWordComponent(
     destroy: () => {
       setDestroyed(true);
       const componentRef = document.getElementById(componentID);
-      componentRef.style.opacity = 0;
-      setHitbox(null, null);
-      console.log(`${index} boom ${destroyed}`);
+      componentRef.style.opacity = 0.1;
+      setHitbox(false, false);
     },
   }));
 
@@ -64,15 +63,7 @@ const DestructribleWord = forwardRef(function DestructribleWordComponent(
   };
 
   return (
-    <p
-      className="target-word"
-      id={componentID}
-      ref={ref}
-      onClick={(e) => {
-        console.log(ref);
-        e.target.style.opacity = 0;
-      }}
-    >
+    <p className="target-word" id={componentID} ref={ref}>
       {wordText}
     </p>
   );

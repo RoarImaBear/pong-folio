@@ -4,10 +4,24 @@
   padding: 0;
 }
 
-div {
+div#ball {
+  background: red;
+  width: 5px;
+  height: 5px;
+  border-radius: 2px;
+  position: absolute;
+  left: 10%;
+  top: 10%;
 }
 
-div.target-paragraph {
+div#paddle {
+  position: absolute;
+  border-radius: 100%;
+  background-color: white;
+  padding: 3px 50px;
+}
+
+div.gameBoard {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,8 +32,13 @@ div.target-paragraph {
   align-content: flex-start;
   justify-content: center;
   width: 360px;
-  height: 80vh;
+  height: 500px;
   border: 1px solid white;
+}
+
+div#score-board {
+  position: absolute;
+  margin-top: 500px;
 }
 
 p.target-word {
