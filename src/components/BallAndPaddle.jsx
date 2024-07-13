@@ -18,7 +18,8 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
     top: paddleStartTop,
   });
 
-  const [running, setRunning] = useState(true);
+  const [running, setRunning] = useState(false);
+  const [gameSpeed, setGameSpeed] = useState(200);
 
   let trueBallPosition = { left: ballStartLeft, top: ballStartTop };
   let trueBallVelocity = { dx: 0, dy: 1 };
@@ -34,7 +35,7 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
         moveBall();
         if (paddleLeft) moveLeft();
         if (paddleRight) moveRight();
-      }, 1000 / 300);
+      }, 1000 / gameSpeed);
 
       return () => clearInterval(interval);
     }
@@ -54,8 +55,6 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
     }
   }, [running]);
 
-  // TODO: Spawn ball
-  // TODO: Ball is still until player moves.
   const respawn = () => {
     trueBallPosition.left = ballStartLeft;
     trueBallPosition.top = ballStartTop;
@@ -65,7 +64,8 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
       left: paddleStartLeft,
       top: paddleStartTop,
     });
-    setScore((prevScore) => prevScore - 5);
+    setScore((prev) => prev - 5);
+    setGameSpeed((prev) => prev + 20);
   };
 
   const reset = () => {
@@ -94,7 +94,6 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
         nextTrueLeft >= truePaddlePosition.left &&
         nextTrueLeft < truePaddlePosition.left + paddleWidth
       ) {
-        // Error when paddle hits very last index || when paddle against the wall and hits there
         let bounceOffset =
           trueBallPosition.left - (truePaddlePosition.left + paddleWidth / 2);
         let newDX = bounceOffset / (paddleWidth / 2);
@@ -160,6 +159,7 @@ export default function BallAndPaddle({ targetRefs, setScore }) {
     const paddle = document.getElementById("paddle");
     const endX = paddle?.offsetLeft + paddle?.offsetWidth;
 
+    // Hard coded boundaries -- pull the variable out.
     if (endX > 360) {
       truePaddlePosition.left = 360 - 102;
       setPaddlePosition({ left: 360 - 102 });
